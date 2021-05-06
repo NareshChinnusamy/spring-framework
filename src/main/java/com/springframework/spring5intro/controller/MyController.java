@@ -1,13 +1,17 @@
 package com.springframework.spring5intro.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.springframework.spring5intro.service.api.GreetingService;
 
 @Controller
 public class MyController {
 
-    public String greetings() {
+    @Autowired
+    GreetingService greetingService;
 
-        System.out.println("This from the controller");
-        return "greetings";
+    public String greetings() {
+        return greetingService.sayGreeting();
     }
 }

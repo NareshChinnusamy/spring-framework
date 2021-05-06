@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.springframework.spring5intro.controller.ConstrutorInjectingController;
 import com.springframework.spring5intro.controller.MyController;
+import com.springframework.spring5intro.controller.ProfileInjectingController;
 import com.springframework.spring5intro.controller.PropertyInjectingController;
 import com.springframework.spring5intro.controller.SetterInjectingController;
 
@@ -14,6 +15,11 @@ public class SpringFrameworkApplication {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(SpringFrameworkApplication.class, args);
+
+        ProfileInjectingController profileInjectingController = (ProfileInjectingController) applicationContext
+                .getBean("profileInjectingController");
+        System.out.println(profileInjectingController.getGreetings());
+
         MyController myController = (MyController) applicationContext.getBean("myController");
 
         String name = myController.greetings();
