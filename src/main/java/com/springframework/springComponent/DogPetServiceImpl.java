@@ -1,10 +1,10 @@
 package com.springframework.springComponent;
 
-public class CatPetServiceImpl implements PetService {
+public class DogPetServiceImpl implements PetService {
 
     @Override
     public String setPetType() {
-        return "My Pet is Bobcat";
+        return "This Pet type is Dog";
     }
 
 }

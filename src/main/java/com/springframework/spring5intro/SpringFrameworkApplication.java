@@ -11,6 +11,8 @@ import com.springframework.spring5intro.controller.PetServiceController;
 import com.springframework.spring5intro.controller.ProfileInjectingController;
 import com.springframework.spring5intro.controller.PropertyInjectingController;
 import com.springframework.spring5intro.controller.SetterInjectingController;
+import com.springframework.spring5intro.service.implementation.PrototypeBean;
+import com.springframework.spring5intro.service.implementation.SingletonBean;
 
 @ComponentScan(basePackages = { "com.springframework.springComponent", "com.springframework.spring5intro" })
 @SpringBootApplication
@@ -24,34 +26,34 @@ public class SpringFrameworkApplication {
         System.out.println(profileInjectingController.getGreetings());
 
         MyController myController = (MyController) applicationContext.getBean("myController");
-
-        String name = myController.greetings();
-
-        System.out.println(name);
+        System.out.println(myController.greetings());
 
         PropertyInjectingController propertyInjectingController = (PropertyInjectingController) applicationContext
                 .getBean("propertyInjectingController");
-
-        String name1 = propertyInjectingController.getGreetings();
-
-        System.out.println(name1);
+        System.out.println(propertyInjectingController.getGreetings());
 
         SetterInjectingController setterInjectingController = (SetterInjectingController) applicationContext
                 .getBean("setterInjectingController");
-
-        String name2 = setterInjectingController.getGreetings();
-
-        System.out.println(name2);
+        System.out.println(setterInjectingController.getGreetings());
 
         ConstrutorInjectingController construtorInjectingController = (ConstrutorInjectingController) applicationContext
                 .getBean("construtorInjectingController");
-
-        String name3 = construtorInjectingController.getGreetings();
-
-        System.out.println(name3);
+        System.out.println(construtorInjectingController.getGreetings());
 
         PetServiceController petServiceController = (PetServiceController) applicationContext
                 .getBean("petServiceController");
         System.out.println(petServiceController.getPetType());
+
+        SingletonBean singletonBean1 = applicationContext.getBean(SingletonBean.class);
+        System.out.println(singletonBean1.getSingleton());
+
+        SingletonBean singletonBean2 = applicationContext.getBean(SingletonBean.class);
+        System.out.println(singletonBean2.getSingleton());
+
+        PrototypeBean prototypeBean1 = applicationContext.getBean(PrototypeBean.class);
+        System.out.println(prototypeBean1.getPrototype());
+
+        PrototypeBean prototypeBean2 = applicationContext.getBean(PrototypeBean.class);
+        System.out.println(prototypeBean2.getPrototype());
     }
 }
