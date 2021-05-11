@@ -3,13 +3,16 @@ package com.springframework.spring5intro;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.springframework.spring5intro.controller.ConstrutorInjectingController;
 import com.springframework.spring5intro.controller.MyController;
+import com.springframework.spring5intro.controller.PetServiceController;
 import com.springframework.spring5intro.controller.ProfileInjectingController;
 import com.springframework.spring5intro.controller.PropertyInjectingController;
 import com.springframework.spring5intro.controller.SetterInjectingController;
 
+@ComponentScan(basePackages = { "com.springframework.springComponent", "com.springframework.spring5intro" })
 @SpringBootApplication
 public class SpringFrameworkApplication {
 
@@ -46,5 +49,9 @@ public class SpringFrameworkApplication {
         String name3 = construtorInjectingController.getGreetings();
 
         System.out.println(name3);
+
+        PetServiceController petServiceController = (PetServiceController) applicationContext
+                .getBean("petServiceController");
+        System.out.println(petServiceController.getPetType());
     }
 }
