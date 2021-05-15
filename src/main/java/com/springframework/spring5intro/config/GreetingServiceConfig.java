@@ -1,5 +1,7 @@
 package com.springframework.spring5intro.config;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.springframework.spring5intro.dao.GreetingRepository;
 import com.springframework.spring5intro.dao.GreetingRepositoryImpl;
+import com.springframework.spring5intro.datasource.DatasourceServiceImpl;
 import com.springframework.spring5intro.service.implementation.ConstructorGreetingServiceImpl;
 import com.springframework.spring5intro.service.implementation.FirstGreetingSericeImpl;
 import com.springframework.spring5intro.service.implementation.PrimaryGreetingServiceImpl;
@@ -15,6 +18,8 @@ import com.springframework.spring5intro.service.implementation.ProfileEsServiceI
 import com.springframework.springComponent.PetService;
 import com.springframework.springComponent.PetServiceFactoryImpl;
 
+// @PropertySource("classpath:datasource.properties")
+@EnableConfigurationProperties(ConstructorBindingPropertiesConfig.class)
 @ImportResource("classpath:Bean.xml")
 @Configuration
 public class GreetingServiceConfig {
@@ -62,5 +67,15 @@ public class GreetingServiceConfig {
     @Bean("rotweiler")
     public PetService catPetService(PetServiceFactoryImpl petServiceFactoryImpl) {
         return petServiceFactoryImpl.petservice("cat");
+    }
+
+    @Bean
+    public DatasourceServiceImpl datasourceServiceImpl(@Value("${spring.username}") String userName,
+            @Value("${spring.password}") String password, BindingPropertiesConfig bindingPropertiesConfig) {
+        DatasourceServiceImpl data = new DatasourceServiceImpl();
+        data.setUserName(userName);
+        data.setPassword(password);
+        data.setJdbcSource(bindingPropertiesConfig.getDatasource());
+        return data;
     }
 }

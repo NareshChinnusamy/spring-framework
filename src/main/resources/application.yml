@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: 
+      - ESP
+      - CAT
+      - qa 
+  username: yamlUser
+  password: yamlPassowrd
+  datasource: yamlSource
+  
+---
+spring:
+  profiles: production
+  username: productionyamlUser
+  password: productionyamlPassowrd
+  datasource: productionyamlSource
