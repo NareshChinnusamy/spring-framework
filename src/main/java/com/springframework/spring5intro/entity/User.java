@@ -1,6 +1,7 @@
 package com.springframework.spring5intro.entity;
 
 import java.time.Instant;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -39,4 +41,7 @@ public class User {
 
     @Column(name = "created_date")
     private Instant createdDate;
+
+    @Transient
+    private List<Long> userRoleId;
 }

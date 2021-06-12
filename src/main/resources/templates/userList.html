@@ -6,7 +6,9 @@
 </head>
 <body>
 	<h1>Retrieve Users Page</h1>
-
+	<div style = "position:relative; left:50px; top:4px;">
+		<a href="/createOrgUser">Create User</a>  
+	</div>
 	<table>
 		<tr>
 			<th>Id</th>
@@ -20,7 +22,7 @@
 
 		<tr th:each="user : ${users}">
 			<td th:text="${user.id}"></td>
-			<td><a th:href="@{/orgUser/{userId}(userId = ${user.id})}"
+			<td><a th:href="@{/orgUsers/{userId}(userId = ${user.id})}"
 				th:text="${user.firstName}"></a></td>
 			<td th:text="${user.lastName}"></td>
 			<td th:text="${user.emailId}"></td>

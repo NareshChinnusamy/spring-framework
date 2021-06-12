@@ -7,34 +7,35 @@
 <body>
 	<h4>Retrieve a Specfic user</h4>
 	<div class="border-bottom">
-		<div class="col-md-4">
-			<p class="font-11 font-gray mb-0">First Name :</p>
-			<p class="mb-0" th:text="${user.firstName} ?: '-'">04/15/2020</p>
-		</div>
+		<p class="row mb-0">
+			<span class="w-50 pr-3 text-right font-gray font-weight-600">First
+				Name : </span><span th:text="${user.firstName}">127</span>
+		</p>
 	</div>
 	<div class="border-bottom">
-		<div class="col-md-4">
-			<p class="font-11 font-gray mb-0">Last Name :</p>
-			<p class="mb-0" th:text="${user.lastName} ?: '-'">04/15/2020</p>
-		</div>
+		<p class="row mb-0">
+			<span class="w-50 pr-3 text-right font-gray font-weight-600">Last
+				Name : </span><span th:text="${user.lastName}">127</span>
+		</p>
 	</div>
 	<div class="border-bottom">
-		<div class="col-md-4">
-			<p class="font-11 font-gray mb-0">EmailId :</p>
-			<p class="mb-0" th:text="${user.emailId} ?: '-'">04/15/2020</p>
-		</div>
+		<p class="row mb-0">
+			<span class="w-50 pr-3 text-right font-gray font-weight-600">EmailId
+				: </span><span th:text="${user.emailId}">127</span>
+		</p>
 	</div>
 	<div class="border-bottom">
-		<div class="col-md-4">
-			<p class="font-11 font-gray mb-0">Address :</p>
-			<p class="mb-0" th:text="${user.address} ?: '-'">04/15/2020</p>
-		</div>
+		<p class="row mb-0">
+			<span class="w-50 pr-3 text-right font-gray font-weight-600">Address
+				: </span><span th:text="${user.address}">127</span>
+		</p>
 	</div>
 	<div class="border-bottom">
-		<div class="col-md-4">
-			<p class="font-11 font-gray mb-0">Mobile Number :</p>
-			<p class="mb-0" th:text="${user.phoneNumber} ?: '-'">04/15/2020</p>
-		</div>
+		<p class="row mb-0">
+			<span class="w-50 pr-3 text-right font-gray font-weight-600">Mobile
+				Number : </span><span th:text="${user.phoneNumber}">127</span>
+		</p>
 	</div>
+	
 </body>
 </html>

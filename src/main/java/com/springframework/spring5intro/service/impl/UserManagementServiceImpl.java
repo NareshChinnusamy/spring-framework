@@ -7,8 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springframework.spring5intro.dao.RoleRepository;
 import com.springframework.spring5intro.dao.UserRepository;
+import com.springframework.spring5intro.dao.UserRoleMapRepository;
+import com.springframework.spring5intro.entity.Role;
 import com.springframework.spring5intro.entity.User;
+import com.springframework.spring5intro.entity.UserRoleMap;
 import com.springframework.spring5intro.service.api.UserManagementService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,18 +24,26 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Autowired
     UserRepository userRepository;
 
-    @Override
-    public User createUser(User user) {
-        log.info("Entering createUser UserManagementService{}", user);
-        user = new User();
-        user.setFirstName("Sugan");
-        user.setLastName("Vellingiri");
-        user.setEmailId("sugan@breezeware.net");
-        user.setAddress("wisconsin");
-        user.setPhoneNumber("45224223");
-        user.setCreatedDate(Instant.now());
+    @Autowired
+    RoleRepository roleRepository;
 
+    @Autowired
+    UserRoleMapRepository userRoleMapRepository;
+
+    @Override
+    public User createUser(User user, List<Long> roleIds) {
+        log.info("Entering createUser UserManagementService{}", user);
+        user.setCreatedDate(Instant.now());
         user = userRepository.save(user);
+        List<Role> roleLists = roleRepository.findByIdIn(roleIds);
+        for (Role role : roleLists) {
+            UserRoleMap userRoleMap = new UserRoleMap();
+            userRoleMap.setUser_id(user.getId());
+            userRoleMap.setRole(role);
+            userRoleMap.setCreatedDate(Instant.now());
+            userRoleMap = userRoleMapRepository.save(userRoleMap);
+        }
+
         log.info("Leaving createUser UserManagementService{}", user);
         return user;
     }
@@ -56,6 +68,23 @@ public class UserManagementServiceImpl implements UserManagementService {
     public User deleteUserById(long userId) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public Role createRole(Role role) {
+        log.info("Entering createRole UserManagementService{}", role);
+        role.setCreatedDate(Instant.now());
+        role = roleRepository.save(role);
+        log.info("Leaving createRole UserManagementService{}", role);
+        return role;
+    }
+
+    @Override
+    public List<Role> retrieveAllRoles() {
+        log.info("Entering retrieveAllUsers UserManagementService{}");
+        List<Role> roles = roleRepository.findAll();
+        log.info("Leaving retrieveAllUsers UserManagementService{}", roles);
+        return roles;
     }
 
 }

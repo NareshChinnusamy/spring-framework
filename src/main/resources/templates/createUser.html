@@ -1,10 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Spring Framework User Management </title>
+<meta charset="UTF-8" />
+<title>Spring Framework User Management</title>
 </head>
 <body>
-<h1>Create User Page</h1>
+	<h1>Create User Form</h1>
+	<div class="row pb-5">
+		<form class="col-12 p-5" th:action="@{/createOrgUser}"
+			th:object="${user}" method="post">
+			<input type="hidden" th:field="*{id}">
+			<div class="border-b mb-3">
+				<h2 class="mb-0">User Information</h2>
+			</div>
+			<div class="pl-4">
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="firstName">First Name : </label> <br> <input
+							type="text" class="form-control" id="firstName" name="firstName"
+							th:field="*{firstName}"><br>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="lastName">Last Name : </label> <br> <input
+							type="text" class="form-control" id="lastName" name="lastName"
+							th:field="*{lastName}"><br>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="phoneNumber">Phone Number : </label><br> <input
+					type="text" class="form-control" id="phoneNumber"
+					name="phoneNumber" th:field="*{phoneNumber}" maxlength="12"
+					data-filter='[0-9]*'><br>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="email">Email Address : </label> <br> <input
+					type="email" class="form-control" id="email" name="email"
+					th:field="*{emailId}"><br>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="email">Address : </label> <br> <input type="text"
+					class="form-control" id="address" name="address"
+					th:field="*{address}"><br>
+			</div>
+
+			<div class="form-groups mt-5">
+				<label>Roles : </label>
+				<ul class="ml-4">
+					<li th:each="role : ${roles}"><label
+						class="form-check-lable pr-3"> <input type="checkbox"
+							th:field="*{userRoleId}" th:value="${role.id}"
+							th:text="${role.name}" class="form-check-input mr-1">
+					</label></li>
+				</ul>
+			</div>
+
+			<div class="text-center py-2">
+				<button class="white btn btn-blue px-3 py-1" type="submit">
+					<i class="fas fa-check"></i> Submit
+				</button>
+			</div>
+		</form>
+	</div>
+
 </body>
 </html>
