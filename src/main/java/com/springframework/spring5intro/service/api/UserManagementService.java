@@ -3,6 +3,10 @@ package com.springframework.spring5intro.service.api;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.springframework.spring5intro.dto.UserRoleDto;
 import com.springframework.spring5intro.entity.Role;
 import com.springframework.spring5intro.entity.User;
 
@@ -18,5 +22,7 @@ public interface UserManagementService {
     Role createRole(Role role);
 
     List<Role> retrieveAllRoles();
+
+    UserRoleDto createUserRoleDto(JSONObject jsonObject) throws JSONException;
 
 }

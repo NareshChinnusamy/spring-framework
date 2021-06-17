@@ -1,35 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data">
 <head>
 <meta charset="UTF-8" />
 <title>Spring Framework User Management</title>
+<!-- <link rel="stylesheet" href="refresh-style.css">
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="user.js"></script> -->
+<script type="text/javascript"> $(document)
+.on(
+		"click",
+		"#new_user-submit_button",
+		function() {
+			alert("Hi")
+			var firstName = $("#new_user-user_firstName").val();
+			var lastName = $("#new_user-user_lastName").val();
+			var emailId = $("#new_user-user_emailId").val();
+		    var address = $("#new_user-user_address").val();
+		    var roleName = $("#new_user-role_name").val();
+		    var roleDescription = $("#new_user-role_description").val();
+							
+		$.ajax({
+				type : 'POST',
+				dataType : 'text',
+				contentType : 'application/json; charset=utf-8',
+				url : "/orgUsers/create-user-role-dto",
+				data : JSON.stringify({
+					"firstName" : firstName,
+					"lastName" : lastName,
+					"emailId" : emailId,
+					"address" : address,
+					"roleName" : roleName,
+					"roleDescription" : roleDescription
+					})
+					});
+					});			</script>
 </head>
 <body>
-	<h1>Retrieve Users Page</h1>
-	<div style = "position:relative; left:50px; top:4px;">
-		<a href="/createOrgUser">Create User</a>  
-	</div>
-	<table>
-		<tr>
-			<th>Id</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Email Id</th>
-			<th>Address</th>
-			<th>Phone Number</th>
-			<th>Created Date</th>
-		</tr>
+	<div>
+		<div class="container-fluid mt-8">
+			<h1>Retrieve Users Page</h1>
+			<div style="position: relative; left: 50px; top: 4px;">
+				<a href="/createOrgUser">Create User</a>
+			</div>
+			<table>
+				<tr>
+					<th>Id</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email Id</th>
+					<th>Address</th>
+					<th>Phone Number</th>
+					<th>Created Date</th>
+				</tr>
 
-		<tr th:each="user : ${users}">
-			<td th:text="${user.id}"></td>
-			<td><a th:href="@{/orgUsers/{userId}(userId = ${user.id})}"
-				th:text="${user.firstName}"></a></td>
-			<td th:text="${user.lastName}"></td>
-			<td th:text="${user.emailId}"></td>
-			<td th:text="${user.address}"></td>
-			<td th:text="${user.phoneNumber}"></td>
-			<td th:text="${user.createdDate}"></td>
-		</tr>
-	</table>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.id}"></td>
+					<td><a th:href="@{/orgUsers/{userId}(userId = ${user.id})}"
+						th:text="${user.firstName}"></a></td>
+					<td th:text="${user.lastName}"></td>
+					<td th:text="${user.emailId}"></td>
+					<td th:text="${user.address}"></td>
+					<td th:text="${user.phoneNumber}"></td>
+					<td th:text="${user.createdDate}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

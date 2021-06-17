@@ -4,12 +4,15 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springframework.spring5intro.dao.RoleRepository;
 import com.springframework.spring5intro.dao.UserRepository;
 import com.springframework.spring5intro.dao.UserRoleMapRepository;
+import com.springframework.spring5intro.dto.UserRoleDto;
 import com.springframework.spring5intro.entity.Role;
 import com.springframework.spring5intro.entity.User;
 import com.springframework.spring5intro.entity.UserRoleMap;
@@ -85,6 +88,19 @@ public class UserManagementServiceImpl implements UserManagementService {
         List<Role> roles = roleRepository.findAll();
         log.info("Leaving retrieveAllUsers UserManagementService{}", roles);
         return roles;
+    }
+
+    @Override
+    public UserRoleDto createUserRoleDto(JSONObject jsonObject) throws JSONException {
+        UserRoleDto userRoleDto = new UserRoleDto();
+
+        userRoleDto.setFirstName(jsonObject.get("firstName").toString());
+        userRoleDto.setLastName(jsonObject.get("lastName").toString());
+        userRoleDto.setEmailId(jsonObject.get("emailId").toString());
+        userRoleDto.setAddress(jsonObject.get("address").toString());
+        userRoleDto.setRoleName(jsonObject.get("roleName").toString());
+        userRoleDto.setRoleDescription(jsonObject.get("roleDescription").toString());
+        return userRoleDto;
     }
 
 }

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../static/refresh-style.css">
+<script type="text/javascript" src="../static/scripts/jquery.min.js"
+	th:src="@{/scripts/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/scripts/userroledto.js"
+	th:src="@{/scripts/userroledto.js}"></script>
+</head>
+<body>
+	<div id="available" class="side-modal hidden" style="width: 35%;">
+
+		<div class="row header-background">
+			<a href="#" class="btn-close pt-0 pb-0 close-div"
+				data-dismiss="modal"> <i class="fas fa-times"></i>
+			</a> <span class="pt-2">
+				<h5>Create User With Role</h5>
+			</span>
+		</div>
+		<div class="slidesection-3">
+			<div class="row pl-5 py-3 mt-4">
+				<div class="pl-md-5 pl-0 col-12 mt-2">
+					<div class="col-4">
+						<label>First Name</label><br> <input type="text"
+							maxlength="100" id="new_user-user_firstName"
+							class="form-control col-12"><br>
+					</div>
+					<div class="col-4">
+						<label>Last Name</label><br> <input type="text"
+							maxlength="100" id="new_user-user_lastName"
+							class="form-control col-12"><br>
+					</div>
+					<div class="col-4">
+						<label>Email Id</label> <br> <input type="text"
+							maxlength="100" id="new_user-user_emailId"
+							class="form-control col-12"><br>
+					</div>
+					<div class="col-4">
+						<label>Address </label> <br> <input type="text"
+							maxlength="100" id="new_user-user_address"
+							class="form-control col-12"><br>
+					</div>
+					<div class="col-4">
+						<label>Role Name </label> <br> <input type="text"
+							maxlength="100" id="new_user-role_name"
+							class="form-control col-12"><br>
+					</div>
+					<div class="col-4">
+						<label>Role Description </label> <br> <input type="text"
+							maxlength="100" id="new_user-role_description"
+							class="form-control col-12"><br>
+					</div>
+					<div class="form-group mt-4">
+						<button id="new_user-submit_button" type="submit"
+							class="btn btn-lightgreen  mr-3">
+							<i class="far fa-check-circle d-none d-sm-none d-md-inline-block"></i>
+							Confirm
+						</button>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>

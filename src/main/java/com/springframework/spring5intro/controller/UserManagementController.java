@@ -4,17 +4,26 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springframework.spring5intro.dao.RoleRepository;
 import com.springframework.spring5intro.dao.UserRoleMapRepository;
+import com.springframework.spring5intro.dto.UserRoleDto;
 import com.springframework.spring5intro.entity.Role;
 import com.springframework.spring5intro.entity.User;
 import com.springframework.spring5intro.entity.UserRoleMap;
@@ -116,5 +125,29 @@ public class UserManagementController {
         userRoleMap = userRoleMapRepository.save(userRoleMap);
         log.info("Leaving the userRoleMap() controller------->{}", userRoleMap);
         return "roleMap";
+    }
+
+    @RequestMapping(value = "/create/orgUserRoleDto", method = RequestMethod.GET)
+    public String userRoleDto() {
+        log.info("Entering the userRoleDto() controller------->");
+
+        log.info("Leaving the userRoleDto() controller------->");
+        return "userroledto";
+    }
+
+    @PostMapping("/orgUserRoleDto/create-user-role-dto")
+    public ResponseEntity<?> createUserRoleDto(@Validated @RequestBody String createUserRole,
+            HttpServletRequest request, HttpSession session) {
+        log.info("Entering the createUserRoleDto controller------->");
+        try {
+            log.info("createUserRole {}", createUserRole);
+            JSONObject jsonObject = new JSONObject(createUserRole);
+            UserRoleDto userRoleDto = userManagementService.createUserRoleDto(jsonObject);
+            log.info("Leaving the createUserRoleDto controller------->userRoleDto {}", userRoleDto);
+            return ResponseEntity.ok("success");
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
